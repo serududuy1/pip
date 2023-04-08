@@ -32,14 +32,14 @@ switch ($_GET['act']) {
                     if (empty(isset($_GET['filter'])) and empty(isset($_GET['filter2']))) {
                       $result = mysqli_query($connect, "SELECT * FROM transaction WHERE transaction_status='done'");
                       if (mysqli_num_rows($result) > 0) { ?>
-                        <a class="btn btn-success" href="modul/mod_laporan/laporan_pdf.php">
+                        <a class="btn btn-success" target="_blank" href="modul/mod_laporan/laporan_pdf.php">
                           <i class="fa fa-print"></i> Print PDF</a>
                       <?php } ?>
                       <?php } else {
                       $result = mysqli_query($connect, "SELECT * FROM transaction WHERE transaction_status='done' AND transaction_created
                                                 BETWEEN '$_GET[filter] 00:00:00' AND '$_GET[filter2] 00:00:00'");
                       if (mysqli_num_rows($result) > 0) { ?>
-                        <a class="btn btn-success" href="modul/mod_laporan/laporan_pdf.php?filter=<?php echo $_GET['filter'] . "&filter2=" . $_GET[filter2] ?>">
+                        <a class="btn btn-success" target="_blank" href="modul/mod_laporan/laporan_pdf.php?filter=<?php echo $_GET['filter'] . "&filter2=" . $_GET[filter2] ?>">
                           <i class="fa fa-print"></i> Print PDF</a>
                     <?php }
                     } ?>

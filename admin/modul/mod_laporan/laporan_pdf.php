@@ -94,27 +94,33 @@ include "../../../config/fungsi_rupiah.php";
 			</tbody>
 		</table>
 	</div>
+	<script>
+		window.print();
+	</script>
 </body>
-
 </html>
 <?php
 $filename = "Laporan.pdf";
 $content = ob_get_clean();
+// $content = '<page style="font-family: freeserif">' . nl2br($content) . '</page>';
+$content .= "<style>" . file_get_contents('pdf.css') . "</style>";
 echo $content;
-$content = '<page style="font-family: freeserif">' . nl2br($content) . '</page>';
-$content .= "<style>\n " . file_get_contents('pdf.css') . "</style>";
+
+
+
+// html2pdf 
 
 // require_once(dirname(__FILE__) . '../../../../config/html2pdf/html2pdf.class.php');
-// require_once(dirname(__FILE__) . '../../../../config/html2pdf/html2pdf.class.php');
-require (__DIR__ . '../../../../vendor/autoload.php'); 
-require_once(dirname(__FILE__) . '../../../../vendor/spipu/html2pdf/html2pdf.class.php');
-// use spipu\html2pdf\html2pdf;
-try {
-	$html2pdf = new HTML2PDF('P', 'A4', 'en', false, 'ISO-8859-15', array(15, 10, 15, 10));
-	$html2pdf->setDefaultFont('Arial');
-	$html2pdf->writeHTML($content, isset($_GET['vuehtml']));
-	$html2pdf->Output($filename,'f');
-} catch (HTML2PDF_exception $e) {
-	echo $e;
-}
+// // require_once(dirname(__FILE__) . '../../../../config/html2pdf/html2pdf.class.php');
+// // require (__DIR__ . '../../../../vendor/autoload.php'); 
+// // require_once(dirname(__FILE__) . '../../../../vendor/spipu/html2pdf/html2pdf.class.php');
+// // use spipu\html2pdf\html2pdf;
+// try {
+// 	$html2pdf = new HTML2PDF('P', 'A4', 'en', false, 'ISO-8859-15', array(15, 10, 15, 10));
+// 	$html2pdf->setDefaultFont('Arial');
+// 	$html2pdf->writeHTML($content, isset($_GET['vuehtml']));
+// 	$html2pdf->Output($filename);
+// } catch (HTML2PDF_exception $e) {
+// 	echo $e;
+// }
 ?>
